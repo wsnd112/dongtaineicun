@@ -1,143 +1,257 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<errno.h>
-
-
-
-//struct S
+//typedef struct stu
 //{
 //	char name[20];
 //	int age;
+//}stu;
+//int main()
+//{
+//	stu s1 = { "zjl",20 };
+//	printf("%s\n",s1.name);
+//	return 0;
+//
+//}
+//struct Node
+//{
+//	int data;
+//	//struct Node n;  error;
+//	struct Node* next;
+//};
+//int main()
+//{
+//	printf("%d", sizeof(struct Node));
+//	return 0;
+//}
+//void* my_memcpy(void* e1, const void* e2, size_t sz)
+//{
+//    assert(e1 && e2);
+//    void* ret = e1;
+//    while (sz--)
+//    {
+//        *(char*)e1 = *(char*)e2;
+//        ++(char*)e1;
+//        ++(char*)e2;
+//    }
+//    return ret;
+//}
+//void* my_memmove(void* e1, void* e2, size_t sz)
+//{
+//    assert(e1 && e2);
+//    void* ret = e1;
+//    if (e1 > e2)
+//    {
+//        while (sz--)
+//        {
+//            *((char*)e1 + sz) = *((char*)e2 + sz);
+//        }
+//    }
+//    else
+//    {
+//        while (sz--)
+//        {
+//            *(char*)e1 = *(char*)e2;
+//            ++(char*)e1;
+//            ++(char*)e2;
+//        }
+//    }
+//    return ret;
+//}
+//
+//typedef struct stu
+//{
+//    char name[20];
+//    int age;
+//}s;
+//int main()
+//{
+//    /*s arr1[] = { {"zhangsan",20},{"lisi",18} };
+//    s arr2[5] = { 0 };*/
+//    /* int arr1[] = { 1,2,3,4,5 };
+//     int arr2[6] = { 0,0,0,0,0,9 };
+//     my_memcpy(arr2, arr1, sizeof(arr1));*/
+//     /* int i;
+//      for (i = 0; i < sizeof(arr2) / sizeof(arr2[0]); i++)
+//      {
+//          printf("%d ", arr2[i]);
+//      }*/
+//    int arr[] = { 1,2,3,4,5,6,7,8,9 };
+//    //my_memcpy(&arr[2], arr, 20);
+//    my_memmove(&arr[2], arr, 20);
+//    //my_memmove(arr, &arr[2], 20);
+//    int i = 0;
+//    for (i = 0; i < 9; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+//#pragma pack(4)//设置默认对齐数为4;
+//struct S
+//{
+//	char a;
+//	double b;
+//};
+//#pragma pack()//取消设置的默认对齐数;
+//int main()
+//{
+//	struct S s = { 0 };
+//	printf("%d", sizeof(s));
+//	return 0;
+//}
+//#include<stddef.h>//offsetof()--计算偏移量;
+//struct S
+//{
+//	char a;
+//	int b;
+//	double d;
+//};
+//int main()
+//{
+//	printf("%d\n", offsetof(struct S, a));
+//	printf("%d\n", offsetof(struct S, b));
+//	printf("%d\n", offsetof(struct S, d));
+//	return 0;
+//}
+
+//struct S
+//{
+//	int a;
+//	char c;
+//	double d;
 //};
 //
+//void Init(struct S* ps)
+//{
+//	ps->a = 10;
+//	ps->c = 'W';
+//	ps->d = 3.14;
+//}
+//void Print1(struct S tmp)
+//{
+//	printf("%d %c %lf\n", tmp.a, tmp.c, tmp.d);
+//}
+//void Print2(const struct S* ps)
+//{
+//	printf("%d %c %lf\n", ps->a, ps->c, ps->d);
+//}
 //int main()
 //{
-//	int n = 0;
-//	scanf("%d", &n);
-//	struct S arr[n] = { 0 };//C99标准  gcc支持 VS error
+//	struct S s = { 0 };
+//	Init(&s);
+//	Print1(s);
+//	Print2(&s);
 //	return 0;
 //}
-
-//void* malloc(size_t num)
-//int main()
+// 
+//位段
+//typedef struct S
 //{
-//	//int* p = (int*)malloc(INT_MAX);//向堆区申请空间
-//	int* p = (int*)malloc(10 * sizeof(int));
-//	if (p == NULL)//堆区剩余空间不足
-//	{
-//		//打印错误原因的方法
-//		printf("%s", strerror(errno));
-//	}
-//	else
-//	{
-//		//正常使用空间
-//		int i = 0;
-//		for (i = 0; i < 10; i++)
-//		{
-//			*(p + i) = i;
-//		}
-//		for (i = 0; i < 10; i++)
-//		{
-//			printf("%d ", p[i]);
-//		}
-//	}
-//	//当动态申请的空间不使用后，应该还给操作系统
-//	free(p);//将内存块还给操作系统  free(void* memblock)
-//	p = NULL;//
-//	return 0;
-//}
-
-
-//void* calloc(size_t num,size_t size)
-//int main()
-//{
-//	int* p = (int*)calloc(10, sizeof(int));//向堆区申请十个整形空间并全初始化为0
-//	if (p == NULL)//堆区剩余空间不足
-//	{
-//		//打印错误原因的方法
-//		printf("%s", strerror(errno));
-//	}
-//	else
-//	{
-//		int i = 0;
-//		for (i = 0; i < 10; i++)
-//		{
-//			printf("%d ", p[i]);
-//		}
-//	}
-//	free(p);//释放动态内存
-//	p = NULL;
-//	return 0;
-//}
-
-
-//void* realloc(void* memblock,size_t size)
-//调整动态开辟内存空间的大小
-//int main()
-//{
-//	int* p = (int*)malloc(20);
-//	//假设20个字节不够，要40个字节
-//	//用realloc
-//	//realloc注意事项
-//	//1,如果p的空间后有足够的空间追加，则直接追加，返回p的地址
-//	//2.如果p的空间后没有足够的内存追加，则realloc重新找一块满足需求的空间，
-//	//将原来的数据拷贝，释放p，返回新空间的地址
-//	//3,得用一个新的变量来接收realloc返回值
-//	int* ptr = (int*)realloc(p, INT_MAX);
-//	if (ptr != NULL)
-//	{
-//		p = ptr;
-//	}
-//	return 0;
-//}
-
-//int main()
-//{
-//	int* p = realloc(NULL, 40);//等价于malloc(40);
-//	return 0;
-//}
-
-//void getmemory(char** p)
-//{
-//	*p = (char*)malloc(100);
-//}
-//
-//void test()
-//{
-//	char* str = NULL;
-//	getmemory(&str);//str传址
-//	strcpy(str, "hello bite");
-//	printf(str);
-//	free(str);//防止内存泄漏
-//	str = NULL;
-//}
+//	char a : 3;
+//	char b : 4;
+//	char c : 5;
+//	char d : 4;
+//}s;
 //
 //int main()
 //{
-//	test();
+//	s a = { 0 };
+//	a.a = 10;
+//	a.b = 20;
+//	a.c = 3;
+//	a.d = 4;
 //	return 0;
 //}
+//枚举
+enum Coler
+{
+	//枚举常量；
+	RED,//0
+	GREEN,//1
+	BLUE//2
+};
+//联合体 共用体 公用一块空间；
+union Un
+{
+	char c;
+	int i;
+};
+int check_sys()
+{
+	union Un
+	{
+		char c;
+		int i;
+	};
+	union Un u = { 0 };
+	u.i = 1;
+	//return 1表示小端
+	//return 0表示大端
+	return u.c;
+}
+int main()
+{
+	int ret = check_sys();
+	if (1 == ret)
+	{
+		printf("小端");
+	}
+	else
+	{
+		printf("大端");
+	}
+	return 0;
+}
 
-//char* getmemory(char* p)
-//{
-//	p = (char*)malloc(100);
-//	return p;
-//}
-//
-//void test()
-//{
-//	char* str = NULL;
-//	str = getmemory(str);//str传值
-//	strcpy(str, "hello bite");
-//	printf(str);
-//	free(str);//防止内存泄漏
-//	str = NULL;
-//}
-//
-//int main()
-//{
-//	test();
-//	return 0;
-//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
